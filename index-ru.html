@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Портфолио IT Project Manager | Veniamin Brykin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14213d;
+      --accent: #fca311;
+      --paper: #f8f7f2;
+      --muted: #4f5d75;
+      --card: rgba(255, 255, 255, 0.86);
+      --line: rgba(20, 33, 61, 0.14);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(252, 163, 17, 0.28), transparent 36%),
+        radial-gradient(circle at 90% 0%, rgba(20, 33, 61, 0.15), transparent 36%),
+        linear-gradient(160deg, #f5f3ec 0%, #f9fbff 54%, #eef4ff 100%);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 2.6rem 0 4rem;
+    }
+
+    .hero {
+      display: block;
+      gap: 1.2rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 6px);
+      padding: clamp(1.5rem, 4vw, 2.6rem);
+      box-shadow: 0 16px 40px rgba(20, 33, 61, 0.12);
+      animation: rise 0.7s ease-out;
+    }
+
+    .kicker {
+      display: inline-block;
+      width: fit-content;
+      background: #fff4e1;
+      color: #8c4b00;
+      padding: 0.36rem 0.78rem;
+      border-radius: 999px;
+      border: 1px solid rgba(252, 163, 17, 0.42);
+      font-size: 0.84rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.4rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--ink);
+      font-size: 0.82rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .lang-btn.active {
+      background: #fff4e1;
+      border-color: rgba(252, 163, 17, 0.56);
+      color: #8c4b00;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.8vw, 3.15rem);
+      max-width: 16ch;
+    }
+
+    .subheadline {
+      max-width: 70ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.13rem);
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .hero-photo {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #eff3fc, #fdf3e3);
+      aspect-ratio: 4 / 5;
+      min-height: 320px;
+      max-height: 560px;
+      position: relative;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+
+    .hero-photo.empty::before {
+      content: "Добавьте фото: Assets/profile-photo.JPG";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      background: linear-gradient(145deg, #eff3fc, #fdf3e3);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 0.45rem;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.3rem 0.74rem;
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      margin-top: 1.4rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem;
+      box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
+      animation: rise 0.9s ease-out;
+    }
+
+    .card h2 {
+      margin-bottom: 0.8rem;
+      font-size: 1.24rem;
+    }
+
+    .about p + p {
+      margin-top: 0.62rem;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.58rem;
+      margin-top: 0.85rem;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.73);
+      padding: 0.7rem;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.05rem;
+      color: #8c4b00;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .skills span {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.38rem 0.58rem;
+      font-size: 0.88rem;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0.84rem;
+      margin-top: 0.3rem;
+    }
+
+    .timeline-item {
+      border-left: 3px solid var(--accent);
+      padding-left: 0.85rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.16rem;
+    }
+
+    .timeline-item .when {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .portfolio {
+      margin-top: 1rem;
+    }
+
+    .portfolio-note {
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(252, 163, 17, 0.7);
+      box-shadow: 0 10px 20px rgba(20, 33, 61, 0.1);
+    }
+
+    .project-card:focus-visible {
+      outline: 2px solid rgba(252, 163, 17, 0.6);
+      outline-offset: 2px;
+    }
+
+    .project-image-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-bottom: 0.58rem;
+      background: #f0f3fa;
+      aspect-ratio: 16 / 10;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 0.42rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.36rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.56rem;
+    }
+
+    .chip {
+      background: #fff4e1;
+      border: 1px solid rgba(252, 163, 17, 0.4);
+      border-radius: 999px;
+      padding: 0.15rem 0.45rem;
+      color: #8c4b00;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 0.45rem;
+      margin-top: 0.25rem;
+    }
+
+    .project-open,
+    .upload-btn {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 0.34rem 0.54rem;
+      font-size: 0.82rem;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .project-open {
+      background: #fff4e1;
+      border-color: rgba(252, 163, 17, 0.5);
+      color: #8c4b00;
+    }
+
+    .project-upload {
+      display: none;
+    }
+
+    .project-modal[hidden] {
+      display: none;
+    }
+
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+
+    .project-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(20, 33, 61, 0.58);
+      backdrop-filter: blur(2px);
+    }
+
+    .project-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(840px, 95vw);
+      max-height: 90vh;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 1.1rem;
+      box-shadow: 0 30px 50px rgba(20, 33, 61, 0.3);
+    }
+
+    .dialog-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .dialog-top h2 {
+      margin-bottom: 0.2rem;
+    }
+
+    .close-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.35rem 0.58rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+    }
+
+    .star-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-top: 0.75rem;
+    }
+
+    .modal-visual {
+      margin: 0.2rem 0 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f4f6fb;
+      aspect-ratio: 16 / 8;
+    }
+
+    .modal-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .star-block {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.75rem;
+      background: #fbfcff;
+    }
+
+    .star-block h3 {
+      margin-bottom: 0.28rem;
+      color: #8c4b00;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .cv {
+      margin-top: 1rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
+      animation: rise 1.05s ease-out;
+    }
+
+    .cv h2 {
+      margin-bottom: 0.8rem;
+      font-size: 1.34rem;
+    }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .cv section + section {
+      margin-top: 0.9rem;
+    }
+
+    .cv h3 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.46rem;
+      color: #8c4b00;
+    }
+
+    .cv ul {
+      list-style: none;
+    }
+
+    .cv li + li {
+      margin-top: 0.45rem;
+    }
+
+    .cv .entry-title {
+      font-weight: 600;
+      display: block;
+    }
+
+    .cv .entry-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact {
+      margin-top: 1rem;
+      text-align: center;
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(252, 163, 17, 0.16), rgba(255, 255, 255, 0.78));
+    }
+
+    .contact a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px dashed #8c4b00;
+      font-weight: 500;
+    }
+
+    .serif {
+      font-family: "IBM Plex Serif", Georgia, serif;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(8px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-layout,
+      .grid,
+      .cv-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        min-height: 260px;
+        max-height: 420px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid,
+      .star-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .container {
+        width: 100%;
+        padding: 0;
+      }
+
+      .hero,
+      .card,
+      .cv,
+      .contact {
+        box-shadow: none;
+        border-color: #ddd;
+      }
+
+      .project-modal {
+        display: none;
+      }
+
+      .lang-switch {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <div class="hero-top">
+        <span class="kicker">Портфолио IT Project Manager + CV</span>
+        <nav class="lang-switch" aria-label="Переключатель языка">
+          <a class="lang-btn" href="index.html">EN</a>
+          <a class="lang-btn active" href="index-ru.html" aria-current="page">RU</a>
+        </nav>
+      </div>
+      <div class="hero-layout">
+        <div>
+          <h1>Вениамин Брыкин, PhD | IT Project Manager</h1>
+          <p class="subheadline serif">
+            Бывший CTO в области аддитивного производства с 10-летним опытом в инженерии и управлении.
+            Реализую сложные технические проекты с прозрачным scope, контролем рисков и измеримым бизнес-результатом.
+          </p>
+          <div class="hero-meta">
+            <span class="tag">PhD в материаловедении</span>
+            <span class="tag">Опыт CTO</span>
+            <span class="tag">10 лет: 2016 - н.в.</span>
+            <span class="tag">Цель: Middle IT Project Manager</span>
+          </div>
+        </div>
+        <figure class="hero-photo">
+          <img src="Assets/profile-photo.JPG" alt="Вениамин Брыкин в лаборатории аддитивного производства" onerror="this.style.display='none';this.parentElement.classList.add('empty');" />
+        </figure>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card about">
+        <h2>Профессиональный профиль</h2>
+        <p>
+          С 2016 года я прошел путь от инженера промышленного аддитивного производства до тимлида, а затем CTO.
+          Моя ключевая ценность - переводить сложную техническую работу в предсказуемое исполнение с понятным бизнес-эффектом.
+        </p>
+        <p>
+          Я построил и масштабировал два сложных производственных направления (SLS и SLM), внедрил рабочие процессы 3D-сканирования и реверс-инжиниринга,
+          а также разработал образовательные программы для студентов и курсы повышения квалификации для инженеров.
+          Сейчас перехожу в IT project management, где применяю тот же подход: структурное планирование, синхронизация стейкхолдеров,
+          контроль бюджета и рисков, а также проектирование процессов с приоритетом автоматизации.
+        </p>
+        <div class="metrics">
+          <div class="metric">
+            <strong>2 ключевые производственные линии</strong>
+            <span>SLS и SLM, включая процессы 3D-сканирования и реверс-инжиниринга</span>
+          </div>
+          <div class="metric">
+            <strong>до ~40 млн ₽/год</strong>
+            <span>Годовой бюджет портфеля промышленных проектов (эквивалент в рублях)</span>
+          </div>
+          <div class="metric">
+            <strong>на 67% меньше ошибок, в 6 раз быстрее</strong>
+            <span>Подбор параметров SLM ускорен с 1 месяца до 4 рабочих дней</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="card">
+        <h2>Ключевые компетенции</h2>
+        <div class="skills">
+          <span>Доставка IT-проектов: scope, сроки, бюджет</span>
+          <span>Управление кросс-функциональными командами</span>
+          <span>Управление стейкхолдерами и отчетность для руководства</span>
+          <span>Управление рисками, качеством и поставкой</span>
+          <span>Agile-ритмы и операционные процессы</span>
+          <span>Проектирование и стандартизация процессов</span>
+          <span>Экономика производства и анализ ROI</span>
+          <span>Автоматизация процессов: Google Sheets, n8n, AI/LLM</span>
+          <span>Технический discovery и оценка реализуемости</span>
+          <span>Разработка учебных и профессиональных программ</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card">
+      <h2>Карьерный путь</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Технический директор (CTO) / Руководитель аддитивного производства</h3>
+          <div class="when">2021 - н.в.</div>
+          <p>Руководил стратегией и операционной деятельностью в AM, масштабировал сервисные направления и реализовывал промышленные проекты с годовым бюджетом портфеля до ~40 млн ₽.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Тимлид, аддитивное производство</h3>
+          <div class="when">2019 - 2021</div>
+          <p>Управлял междисциплинарными командами, внедрил delivery-ритмы и формализовал процессы планирования и контроля качества.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Инженер, промышленное аддитивное производство</h3>
+          <div class="when">2016 - 2019</div>
+          <p>Занимался внедрением, интеграцией и оптимизацией оборудования, а также технической поставкой в проектах SLS/SLM.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card portfolio" id="portfolio">
+      <h2>Портфолио проектов</h2>
+      <p class="portfolio-note">Каждый кейс оформлен по STAR. Для каждой карточки можно загрузить свой скриншот, чтобы сделать портфолио визуальным.</p>
+      <div class="project-grid">
+        <article class="project-card" data-project-id="scale-am-directions" tabindex="0" role="button" aria-label="Открыть STAR-кейс: Масштабирование направлений AM">
+          <div class="project-image-wrap">
+            <img class="project-image" data-project-image="scale-am-directions" alt="Превью скриншота проекта запуска направлений AM" />
+          </div>
+          <h3>Масштабирование направлений AM</h3>
+          <p>Запустил и масштабировал две ключевые производственные линии (SLS/SLM) с готовыми к производству процессами 3D-сканирования и реверс-инжиниринга.</p>
+          <div class="project-meta">
+            <span class="chip">B2B</span>
+            <span class="chip">Операции</span>
+            <span class="chip">Лидерство</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-open" data-open-project="scale-am-directions" type="button">Открыть STAR-кейс</button>
+            <label class="upload-btn" for="upload-scale-am-directions">Загрузить скриншот</label>
+            <input class="project-upload" id="upload-scale-am-directions" data-upload-id="scale-am-directions" type="file" accept="image/*" />
+          </div>
+        </article>
+        <article class="project-card" data-project-id="am-audits-prioritization" tabindex="0" role="button" aria-label="Открыть STAR-кейс: Аддитивные аудиты и приоритизация деталей">
+          <div class="project-image-wrap">
+            <img class="project-image" data-project-image="am-audits-prioritization" alt="Превью скриншота проекта аудита и приоритизации" />
+          </div>
+          <h3>Аддитивные аудиты и приоритизация деталей</h3>
+          <p>Разработал методологию аудита и скрининга для выявления AM-возможностей с высокой ценностью на промышленных предприятиях.</p>
+          <div class="project-meta">
+            <span class="chip">Консалтинг</span>
+            <span class="chip">ROI</span>
+            <span class="chip">Лидерство</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-open" data-open-project="am-audits-prioritization" type="button">Открыть STAR-кейс</button>
+            <label class="upload-btn" for="upload-am-audits-prioritization">Загрузить скриншот</label>
+            <input class="project-upload" id="upload-am-audits-prioritization" data-upload-id="am-audits-prioritization" type="file" accept="image/*" />
+          </div>
+        </article>
+        <article class="project-card" data-project-id="ml-slm-optimization" tabindex="0" role="button" aria-label="Открыть STAR-кейс: ML-оптимизация параметров SLM">
+          <div class="project-image-wrap">
+            <img class="project-image" data-project-image="ml-slm-optimization" alt="Превью скриншота проекта ML-оптимизации SLM" />
+          </div>
+          <h3>ML-оптимизация параметров SLM</h3>
+          <p>Методология на базе PhD для автоматизированного подбора параметров процесса в порошковых композитах AlSi10Mg.</p>
+          <div class="project-meta">
+            <span class="chip">R&amp;D</span>
+            <span class="chip">ML</span>
+            <span class="chip">Материаловедение</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-open" data-open-project="ml-slm-optimization" type="button">Открыть STAR-кейс</button>
+            <label class="upload-btn" for="upload-ml-slm-optimization">Загрузить скриншот</label>
+            <input class="project-upload" id="upload-ml-slm-optimization" data-upload-id="ml-slm-optimization" type="file" accept="image/*" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cv">
+      <h2>Краткий срез CV</h2>
+      <div class="cv-grid">
+        <div>
+          <section>
+            <h3>Опыт работы</h3>
+            <ul>
+              <li>
+                <span class="entry-title">Технический директор (CTO) / Руководитель аддитивного производства | 3D-лаборатория</span>
+                <span class="entry-meta">Москва, Россия | 2021 - н.в.</span>
+                <div>Запустил и масштабировал линии SLS/SLM, а также процессы 3D-сканирования и реверс-инжиниринга; вел портфели промышленных проектов до ~40 млн ₽/год.</div>
+              </li>
+              <li>
+                <span class="entry-title">Тимлид, аддитивное производство | 3D-лаборатория</span>
+                <span class="entry-meta">Москва, Россия | 2019 - 2021</span>
+                <div>Руководил инженерами и лабораторными специалистами, внедрил планирование и контроль качества, повысил координацию команды и предсказуемость исполнения.</div>
+              </li>
+              <li>
+                <span class="entry-title">Инженер, промышленное аддитивное производство</span>
+                <span class="entry-meta">Москва, Россия | 2016 - 2019</span>
+                <div>Реализовывал проекты внедрения и оптимизации оборудования, включая реверс-инжиниринг и процессы 3D-сканирования.</div>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Образование</h3>
+            <ul>
+              <li>
+                <span class="entry-title">PhD в материаловедении</span>
+                <span class="entry-meta">Московский авиационный институт | 2024</span>
+                <div>Диссертация: "Влияние параметров селективного лазерного плавления на структуру и физико-механические свойства изделий из порошкового сплава AlSi10Mg".</div>
+              </li>
+              <li>
+                <span class="entry-title">Результат исследования</span>
+                <span class="entry-meta">Автоматизированная + ML-поддерживаемая оптимизация SLM</span>
+                <div>Снизил ошибку подбора параметров на 67% и ускорил цикл поиска в 6 раз (с 1 месяца до 4 рабочих дней).</div>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <div>
+          <section>
+            <h3>Ключевые достижения</h3>
+            <ul>
+              <li>Внедрил системы оценки, регламентов и контроля качества, что снизило риски срыва сроков.</li>
+              <li>Ввел ритмы планирования (daily standups, weekly reviews и сопутствующие практики), улучшив координацию и командную динамику.</li>
+              <li>Провел аудиты аддитивного производства для промышленных предприятий и выявил десятки деталей с потенциалом AM.</li>
+              <li>Построил методы скрининга и приоритизации, связывающие решения R&amp;D с измеримым бизнес-результатом.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Инструменты и методы</h3>
+            <ul>
+              <li>Проекты и операции: Agile-ритуалы, управление планированием, контроль рисков и бюджета</li>
+              <li>Домен: SLS/SLM, реверс-инжиниринг, 3D-сканирование, стратегия внедрения AM</li>
+              <li>Автоматизация: Google Sheets, n8n, AI/LLM-поддерживаемые процессы</li>
+              <li>Лидерство: управление междисциплинарными командами, найм, разрешение конфликтов, экспертная отчетность</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Языки и контакты</h3>
+            <ul>
+              <li>Языки: русский (родной), английский (Upper-Intermediate/Advanced: технический, деловой, академический)</li>
+              <li>Email: benbrykin@gmail.com</li>
+              <li>LinkedIn: www.linkedin.com/in/benbrykin</li>
+              <li>Локация: Москва, Россия</li>
+              <li>Сертификации: нет формальных сертификатов Scrum/PMP/Product School; экспертиза сформирована на реальных промышленных проектах и в управлении R&amp;D.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <p><strong>Открыт к возможностям Middle IT Project Manager.</strong></p>
+      <p>
+        Контакт: <a href="mailto:benbrykin@gmail.com">benbrykin@gmail.com</a> |
+        LinkedIn: <a href="https://www.linkedin.com/in/benbrykin">www.linkedin.com/in/benbrykin</a>
+      </p>
+    </section>
+  </main>
+
+  <div class="project-modal" id="project-modal" hidden>
+    <div class="project-backdrop" data-close-modal></div>
+    <article class="project-dialog" role="dialog" aria-modal="true" aria-labelledby="project-title">
+      <div class="dialog-top">
+        <div>
+          <h2 id="project-title">Название проекта</h2>
+          <p id="project-summary"></p>
+        </div>
+        <button class="close-btn" id="close-modal" type="button" aria-label="Закрыть детали проекта">Закрыть</button>
+      </div>
+      <figure class="modal-visual">
+        <img id="project-visual" alt="Превью скриншота проекта в STAR-модалке" />
+      </figure>
+      <div class="star-grid">
+        <section class="star-block">
+          <h3>Ситуация</h3>
+          <p id="project-situation"></p>
+        </section>
+        <section class="star-block">
+          <h3>Задача</h3>
+          <p id="project-task"></p>
+        </section>
+        <section class="star-block">
+          <h3>Действия</h3>
+          <p id="project-action"></p>
+        </section>
+        <section class="star-block">
+          <h3>Результат</h3>
+          <p id="project-result"></p>
+        </section>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const projects = {
+      "scale-am-directions": {
+        title: "Масштабирование направлений AM",
+        summary: "Запустил и масштабировал две ключевые производственные линии (SLS/SLM) с готовыми к производству процессами 3D-сканирования и реверс-инжиниринга.",
+        situation: "Бизнесу требовался устойчивый рост в аддитивном производстве, но существующие возможности были фрагментированы и плохо масштабировались.",
+        task: "Построить интегрированную операционную модель, поддерживающую несколько направлений AM со стабильным качеством и предсказуемой поставкой.",
+        action: "Я определил стандарты и регламенты, внедрил ритмы планирования (daily standups и weekly reviews), синхронизировал междисциплинарные команды и связал решения R&D с производственными и коммерческими приоритетами.",
+        result: "Были запущены и масштабированы две сложные производственные линии (SLS/SLM), а также процессы 3D-сканирования и реверс-инжиниринга; объем портфелей промышленных проектов достиг ~40 млн ₽/год, а операционные риски и срывы сроков снизились."
+      },
+      "am-audits-prioritization": {
+        title: "Аддитивные аудиты и приоритизация деталей",
+        summary: "Создал методологию от аудита до приоритизации, переводящую промышленный запрос в ценные аддитивные проекты.",
+        situation: "Многие предприятия хотели развивать аддитивное производство, но не имели структурированного подхода к оценке реальной ценности AM.",
+        task: "Спроектировать и провести аудиты, выявляющие подходящие AM-кандидаты, и приоритизировать их по технической реализуемости и экономическому эффекту.",
+        action: "Я проводил аудиты предприятий, строил фреймворки скрининга, оценивал детали-кандидаты и готовил отчеты для принятия решений и планирования внедрения.",
+        result: "Аудиты выявили десятки деталей, подходящих для AM, у промышленных клиентов и повысили конверсию из технического исследования в коммерческие проекты."
+      },
+      "ml-slm-optimization": {
+        title: "ML-оптимизация параметров SLM (PhD)",
+        summary: "Разработал автоматизированную методологию выбора параметров селективного лазерного плавления для AlSi10Mg.",
+        situation: "Ручной подбор параметров в SLM был медленным и подверженным ошибкам, что ограничивало скорость и надежность оптимизации материала и процесса.",
+        task: "Создать data-driven метод для более быстрого и точного достижения целевой структуры и физико-механических свойств.",
+        action: "Я спроектировал и провел эксперименты, разработал инструменты автоматизации и интегрировал ML-поддерживаемые процессы в подбор параметров.",
+        result: "Ошибка подбора параметров снижена на 67% (с 15% до 5%), а циклы настройки ускорены в 6 раз (с 1 месяца до 4 рабочих дней)."
+      }
+    };
+
+    const modal = document.getElementById("project-modal");
+    const title = document.getElementById("project-title");
+    const summary = document.getElementById("project-summary");
+    const visual = document.getElementById("project-visual");
+    const situation = document.getElementById("project-situation");
+    const task = document.getElementById("project-task");
+    const action = document.getElementById("project-action");
+    const result = document.getElementById("project-result");
+    const closeModalButton = document.getElementById("close-modal");
+    const projectCards = document.querySelectorAll(".project-card");
+    const openButtons = document.querySelectorAll("[data-open-project]");
+    const uploadInputs = document.querySelectorAll(".project-upload");
+    const backdrop = document.querySelector("[data-close-modal]");
+    let currentProjectId = null;
+    const projectImages = {};
+    const defaultProjectImages = {
+      "scale-am-directions": "Assets/AM_Production_Lines.jpg",
+      "am-audits-prioritization": "Assets/Additive_Audit.png",
+      "ml-slm-optimization": "Assets/ML_Parameters_Optimization.png"
+    };
+
+    function createPlaceholder(label) {
+      const escaped = encodeURIComponent(label);
+      return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='750' viewBox='0 0 1200 750'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%23e8edf8'/><stop offset='100%' stop-color='%23fdf2df'/></linearGradient></defs><rect width='1200' height='750' fill='url(%23g)'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Space Grotesk, Arial' font-size='46' fill='%234f5d75'>${escaped}</text></svg>`;
+    }
+
+    function getProjectImage(projectId) {
+      return projectImages[projectId] || defaultProjectImages[projectId] || createPlaceholder(projects[projectId].title);
+    }
+
+    function refreshProjectCardImage(projectId) {
+      document.querySelectorAll(`[data-project-image='${projectId}']`).forEach((img) => {
+        img.src = getProjectImage(projectId);
+      });
+    }
+
+    function openProject(projectId) {
+      const project = projects[projectId];
+      if (!project) return;
+      currentProjectId = projectId;
+      title.textContent = project.title;
+      summary.textContent = project.summary;
+      visual.src = getProjectImage(projectId);
+      situation.textContent = project.situation;
+      task.textContent = project.task;
+      action.textContent = project.action;
+      result.textContent = project.result;
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeProjectModal() {
+      currentProjectId = null;
+      modal.hidden = true;
+      document.body.style.overflow = "";
+    }
+
+    Object.keys(projects).forEach((projectId) => refreshProjectCardImage(projectId));
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", () => openProject(button.dataset.openProject));
+    });
+
+    projectCards.forEach((card) => {
+      card.addEventListener("click", (event) => {
+        if (event.target.closest(".project-actions")) return;
+        openProject(card.dataset.projectId);
+      });
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openProject(card.dataset.projectId);
+        }
+      });
+    });
+
+    uploadInputs.forEach((input) => {
+      input.addEventListener("change", (event) => {
+        const projectId = event.target.dataset.uploadId;
+        const file = event.target.files[0];
+        if (!projectId || !file) return;
+        const objectUrl = URL.createObjectURL(file);
+        projectImages[projectId] = objectUrl;
+        refreshProjectCardImage(projectId);
+        if (currentProjectId === projectId) {
+          visual.src = objectUrl;
+        }
+      });
+    });
+
+    closeModalButton.addEventListener("click", closeProjectModal);
+    backdrop.addEventListener("click", closeProjectModal);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) {
+        closeProjectModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
