@@ -47,7 +47,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: calc(var(--radius) + 6px);
-      padding: clamp(1.5rem, 4vw, 2.6rem);
+      padding: clamp(1.5rem, 4vw, 2.6rem) clamp(2rem, 5vw, 3.2rem);
       box-shadow: 0 16px 40px rgba(20, 33, 61, 0.12);
       animation: rise 0.7s ease-out;
     }
@@ -122,7 +122,7 @@
     .hero-layout {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 1rem;
+      gap: 2rem;
       align-items: center;
     }
 
@@ -184,7 +184,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.15rem 1.2rem;
+      padding: 1.15rem 1.8rem;
       box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
       animation: rise 0.9s ease-out;
     }
@@ -266,14 +266,20 @@
     .project-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.7rem;
+      grid-template-rows: repeat(4, auto);
+      column-gap: 1.4rem;
+      row-gap: 0;
     }
 
     .project-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0.5rem;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.85rem;
+      padding: 1.2rem 1.3rem;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
@@ -306,56 +312,57 @@
     }
 
     .project-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+      margin-bottom: 0.1rem;
     }
 
     .project-card p {
       font-size: 0.92rem;
       color: var(--muted);
-      margin-bottom: 0.42rem;
+      margin-bottom: 0;
     }
 
-    .project-meta {
+    .project-card-bottom {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.36rem;
-      font-size: 0.8rem;
-      margin-bottom: 0.56rem;
-    }
-
-    .chip {
-      background: #fff4e1;
-      border: 1px solid rgba(252, 163, 17, 0.4);
-      border-radius: 999px;
-      padding: 0.15rem 0.45rem;
-      color: #8c4b00;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-self: end;
     }
 
     .project-actions {
       display: flex;
       gap: 0.45rem;
-      margin-top: 0.25rem;
-    }
-
-    .project-open,
-    .upload-btn {
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 0.34rem 0.54rem;
-      font-size: 0.82rem;
-      background: #fff;
-      cursor: pointer;
     }
 
     .project-open {
-      background: #fff4e1;
-      border-color: rgba(252, 163, 17, 0.5);
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
       color: #8c4b00;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(252, 163, 17, 0.5);
+      transition: border-color 0.2s ease, color 0.2s ease;
     }
 
-    .project-upload {
-      display: none;
+    .project-open:hover {
+      color: #6b3700;
+      border-bottom-color: #fca311;
+    }
+
+    .project-result {
+      font-size: 0.88rem;
+      color: var(--ink);
+      padding: 0.5rem 0.7rem;
+      background: rgba(252, 163, 17, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .project-result strong {
+      color: #8c4b00;
     }
 
     .project-modal[hidden] {
@@ -387,7 +394,7 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       background: #fff;
-      padding: 1.1rem;
+      padding: 1.1rem 1.8rem;
       box-shadow: 0 30px 50px rgba(20, 33, 61, 0.3);
     }
 
@@ -455,7 +462,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.2rem;
+      padding: 1.2rem 1.8rem;
       box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
       animation: rise 1.05s ease-out;
     }
@@ -504,7 +511,7 @@
     .contact {
       margin-top: 1rem;
       text-align: center;
-      padding: 1.25rem;
+      padding: 1.25rem 1.8rem;
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(252, 163, 17, 0.16), rgba(255, 255, 255, 0.78));
@@ -551,6 +558,12 @@
       .project-grid,
       .star-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+
+      .project-card {
+        grid-row: auto;
+        grid-template-rows: none;
       }
 
       .hero-top {
@@ -601,7 +614,7 @@
         <div>
           <h1>Veniamin Brykin PhD | IT Project Manager</h1>
           <p class="subheadline serif">
-            10 years managing technical projects, teams, and department P&L with revenue up to 150M RUB/year. From engineer to CTO in additive manufacturing. Transitioning to IT PM with a focus on structured planning, automation, and delivering results.
+            10 years managing technical projects, teams, and department P&L with turnover up to $1.8M/year. From engineer to CTO in additive manufacturing. Transitioning to IT PM with a focus on structured planning, automation, and delivering results.
           </p>
           <div class="hero-meta">
             <span class="tag">PhD in Materials Science</span>
@@ -636,8 +649,8 @@
             <span>SLS and SLM, with 3D-scanning and reverse-engineering routines</span>
           </div>
           <div class="metric">
-            <strong>up to 150M RUB/year</strong>
-            <span>Department P&L: annual revenue (RUB equivalent)</span>
+            <strong>up to $1.8M/year</strong>
+            <span>Department P&L: annual turnover</span>
           </div>
           <div class="metric">
             <strong>67% fewer errors, 6x faster</strong>
@@ -669,7 +682,7 @@
         <div class="timeline-item">
           <h3>Technical Director (CTO) / Head of Additive Manufacturing</h3>
           <div class="when">2021 - Present</div>
-          <p>Led AM strategy and operations, managed department P&L with revenue up to 150M RUB/year, scaled service lines, and delivered industrial projects.</p>
+          <p>Led AM strategy and operations, managed department P&L with turnover up to $1.8M/year, scaled service lines, and delivered industrial projects.</p>
         </div>
         <div class="timeline-item">
           <h3>Team Lead, Additive Manufacturing</h3>
@@ -686,64 +699,52 @@
 
     <section class="card portfolio" id="portfolio">
       <h2>Project Portfolio</h2>
-      <p class="portfolio-note">Each case is in STAR format. You can upload your own screenshots for every project card to make the portfolio visual.</p>
+      <p class="portfolio-note">Each case is presented in STAR format. Click any card to explore the full case.</p>
       <div class="project-grid">
         <article class="project-card" data-project-id="scale-am-directions" tabindex="0" role="button" aria-label="Open STAR case: Scaling AM Service Lines">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="scale-am-directions" alt="Project screenshot preview for AM service line launch" />
           </div>
           <h3>Scaling AM Service Lines</h3>
-          <p>Launched and scaled two core production lines (SLS/SLM) with production-ready 3D-scanning and reverse-engineering routines.</p>
-          <div class="project-meta">
-            <span class="chip">B2B</span>
-            <span class="chip">Operations</span>
-            <span class="chip">Leadership</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="scale-am-directions" type="button">View STAR case</button>
-            <label class="upload-btn" for="upload-scale-am-directions">Upload screenshot</label>
-            <input class="project-upload" id="upload-scale-am-directions" data-upload-id="scale-am-directions" type="file" accept="image/*" />
+          <p>Built two production lines from scratch, set up 3D-scanning and reverse-engineering workflows, and managed department P&amp;L up to $1.8M/year.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Result:</strong> Revenue grew to $1.8M/yr, delivery risks cut by 40%</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="scale-am-directions" type="button">View details →</button>
+            </div>
           </div>
         </article>
         <article class="project-card" data-project-id="am-audits-prioritization" tabindex="0" role="button" aria-label="Open STAR case: Additive Audits and Part Prioritization">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="am-audits-prioritization" alt="Project screenshot preview for additive audit and prioritization" />
           </div>
-          <h3>Additive Audits and Part Prioritization</h3>
-          <p>Built an audit and screening methodology to identify high-value AM opportunities in industrial enterprises.</p>
-          <div class="project-meta">
-            <span class="chip">Consulting</span>
-            <span class="chip">ROI</span>
-            <span class="chip">Leadership</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="am-audits-prioritization" type="button">View STAR case</button>
-            <label class="upload-btn" for="upload-am-audits-prioritization">Upload screenshot</label>
-            <input class="project-upload" id="upload-am-audits-prioritization" data-upload-id="am-audits-prioritization" type="file" accept="image/*" />
+          <h3>Additive Audits &amp; Part Prioritization</h3>
+          <p>Designed an enterprise audit framework to screen hundreds of parts, score AM candidates, and build business cases with ROI estimates.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Result:</strong> Dozens of viable AM parts identified, higher consulting conversion</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="am-audits-prioritization" type="button">View details →</button>
+            </div>
           </div>
         </article>
         <article class="project-card" data-project-id="ml-slm-optimization" tabindex="0" role="button" aria-label="Open STAR case: ML-Assisted SLM Parameter Optimization">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="ml-slm-optimization" alt="Project screenshot preview for ML-assisted SLM optimization" />
           </div>
-          <h3>ML-Assisted SLM Parameter Optimization</h3>
-          <p>PhD-based methodology for automated process parameter selection in AlSi10Mg metal powder composites.</p>
-          <div class="project-meta">
-            <span class="chip">R&amp;D</span>
-            <span class="chip">ML</span>
-            <span class="chip">Materials Science</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="ml-slm-optimization" type="button">View STAR case</button>
-            <label class="upload-btn" for="upload-ml-slm-optimization">Upload screenshot</label>
-            <input class="project-upload" id="upload-ml-slm-optimization" data-upload-id="ml-slm-optimization" type="file" accept="image/*" />
+          <h3>ML-Assisted SLM Optimization</h3>
+          <p>Developed a machine-learning pipeline to automate parameter selection for metal 3D-printing, replacing months of manual trial-and-error.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Result:</strong> Error cut from 15% to 5%, tuning cycle 1 month → 4 days</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="ml-slm-optimization" type="button">View details →</button>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
     <section class="cv">
-      <h2>Curriculum Vitae Snapshot</h2>
+      <h2>CV Snapshot</h2>
       <div class="cv-grid">
         <div>
           <section>
@@ -772,11 +773,11 @@
           <section>
             <h3>Tools and Methods</h3>
             <ul>
-              <li>Project Management: Jira, Confluence, Miro, Notion; WBS, Gantt, risk register, budget tracking</li>
-              <li>Frameworks: Scrum, Kanban, hybrid Waterfall+Agile; STAR/RACI for communication</li>
-              <li>Automation: Google Sheets (scripts + formulas), n8n (workflow automation), ChatGPT/LLM pipelines</li>
-              <li>Domain: SLS/SLM, 3D scanning, reverse engineering, CAD/CAE, industrial AM implementation</li>
-              <li>Leadership: teams up to 10 people, hiring &amp; onboarding, 1-on-1s, conflict resolution, C-level reporting</li>
+              <li><strong>Project Management:</strong> Jira, Confluence, Miro, Notion; WBS, Gantt, risk register, budget tracking</li>
+              <li><strong>Frameworks:</strong> Scrum, Kanban, hybrid Waterfall+Agile; STAR/RACI for communication</li>
+              <li><strong>Automation:</strong> Google Sheets (scripts + formulas), n8n (workflow automation), ChatGPT/LLM pipelines</li>
+              <li><strong>Domain:</strong> SLS/SLM, 3D scanning, reverse engineering, CAD/CAE, industrial AM implementation</li>
+              <li><strong>Leadership:</strong> teams up to 20 people, hiring &amp; onboarding, 1-on-1s, conflict resolution, C-level reporting</li>
             </ul>
           </section>
         </div>
@@ -785,7 +786,7 @@
           <section>
             <h3>Selected Achievements</h3>
             <ul>
-              <li>Launched and ramped up 2 production lines (SLS &amp; SLM), managed department P&L with revenue up to 150M RUB/year.</li>
+              <li>Launched and ramped up 2 production lines (SLS &amp; SLM), managed department P&L with turnover up to $1.8M/year.</li>
               <li>Implemented checklists, acceptance criteria, and delivery regulations, reducing deadline overruns and rework.</li>
               <li>Established operational cadences (daily standup, weekly review, retrospectives) that improved status transparency and shortened blocker response time.</li>
               <li>Conducted AM audits at industrial enterprises: scanned and evaluated hundreds of parts, shortlisted dozens of AM candidates with ROI estimates.</li>
@@ -796,8 +797,8 @@
           <section>
             <h3>Languages</h3>
             <ul>
-              <li>Russian — native</li>
-              <li>English — fluent (technical, business, academic)</li>
+              <li><strong>Russian</strong> — native</li>
+              <li><strong>English</strong> — fluent (technical, business, academic)</li>
             </ul>
           </section>
         </div>
@@ -855,7 +856,7 @@
         situation: "The business needed reliable growth in additive manufacturing, but capabilities were fragmented and difficult to scale.",
         task: "Build an integrated operating model that could support multiple AM directions with consistent quality and predictable delivery.",
         action: "I defined standards and regulations, implemented planning cadences (daily standups and weekly reviews), aligned multidisciplinary teams, and connected R&D decisions to production and commercial priorities.",
-        result: "Two complex production lines (SLS/SLM) plus 3D-scanning and reverse-engineering routines were launched and scaled, department revenue reached 150M RUB/year, and operational risks and deadline failures were reduced."
+        result: "Two complex production lines (SLS/SLM) plus 3D-scanning and reverse-engineering routines were launched and scaled, department turnover reached $1.8M/year, and operational risks and deadline failures were reduced."
       },
       "am-audits-prioritization": {
         title: "Additive Audits and Part Prioritization",
@@ -886,7 +887,7 @@
     const closeModalButton = document.getElementById("close-modal");
     const projectCards = document.querySelectorAll(".project-card");
     const openButtons = document.querySelectorAll("[data-open-project]");
-    const uploadInputs = document.querySelectorAll(".project-upload");
+
     const backdrop = document.querySelector("[data-close-modal]");
     let currentProjectId = null;
     const projectImages = {};
@@ -947,20 +948,6 @@
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           openProject(card.dataset.projectId);
-        }
-      });
-    });
-
-    uploadInputs.forEach((input) => {
-      input.addEventListener("change", (event) => {
-        const projectId = event.target.dataset.uploadId;
-        const file = event.target.files[0];
-        if (!projectId || !file) return;
-        const objectUrl = URL.createObjectURL(file);
-        projectImages[projectId] = objectUrl;
-        refreshProjectCardImage(projectId);
-        if (currentProjectId === projectId) {
-          visual.src = objectUrl;
         }
       });
     });

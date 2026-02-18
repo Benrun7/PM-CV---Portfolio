@@ -47,7 +47,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: calc(var(--radius) + 6px);
-      padding: clamp(1.5rem, 4vw, 2.6rem);
+      padding: clamp(1.5rem, 4vw, 2.6rem) clamp(2rem, 5vw, 3.2rem);
       box-shadow: 0 16px 40px rgba(20, 33, 61, 0.12);
       animation: rise 0.7s ease-out;
     }
@@ -122,7 +122,7 @@
     .hero-layout {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 1rem;
+      gap: 2rem;
       align-items: center;
     }
 
@@ -184,7 +184,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.15rem 1.2rem;
+      padding: 1.15rem 1.8rem;
       box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
       animation: rise 0.9s ease-out;
     }
@@ -266,14 +266,20 @@
     .project-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.7rem;
+      grid-template-rows: repeat(4, auto);
+      column-gap: 1.4rem;
+      row-gap: 0;
     }
 
     .project-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0.5rem;
       background: rgba(255, 255, 255, 0.72);
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.85rem;
+      padding: 1.2rem 1.3rem;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
@@ -306,56 +312,57 @@
     }
 
     .project-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+      margin-bottom: 0.1rem;
     }
 
     .project-card p {
       font-size: 0.92rem;
       color: var(--muted);
-      margin-bottom: 0.42rem;
+      margin-bottom: 0;
     }
 
-    .project-meta {
+    .project-card-bottom {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.36rem;
-      font-size: 0.8rem;
-      margin-bottom: 0.56rem;
-    }
-
-    .chip {
-      background: #fff4e1;
-      border: 1px solid rgba(252, 163, 17, 0.4);
-      border-radius: 999px;
-      padding: 0.15rem 0.45rem;
-      color: #8c4b00;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-self: end;
     }
 
     .project-actions {
       display: flex;
       gap: 0.45rem;
-      margin-top: 0.25rem;
-    }
-
-    .project-open,
-    .upload-btn {
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 0.34rem 0.54rem;
-      font-size: 0.82rem;
-      background: #fff;
-      cursor: pointer;
     }
 
     .project-open {
-      background: #fff4e1;
-      border-color: rgba(252, 163, 17, 0.5);
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
       color: #8c4b00;
+      cursor: pointer;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(252, 163, 17, 0.5);
+      transition: border-color 0.2s ease, color 0.2s ease;
     }
 
-    .project-upload {
-      display: none;
+    .project-open:hover {
+      color: #6b3700;
+      border-bottom-color: #fca311;
+    }
+
+    .project-result {
+      font-size: 0.88rem;
+      color: var(--ink);
+      padding: 0.5rem 0.7rem;
+      background: rgba(252, 163, 17, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .project-result strong {
+      color: #8c4b00;
     }
 
     .project-modal[hidden] {
@@ -387,7 +394,7 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       background: #fff;
-      padding: 1.1rem;
+      padding: 1.1rem 1.8rem;
       box-shadow: 0 30px 50px rgba(20, 33, 61, 0.3);
     }
 
@@ -455,7 +462,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 1.2rem;
+      padding: 1.2rem 1.8rem;
       box-shadow: 0 10px 26px rgba(20, 33, 61, 0.08);
       animation: rise 1.05s ease-out;
     }
@@ -504,7 +511,7 @@
     .contact {
       margin-top: 1rem;
       text-align: center;
-      padding: 1.25rem;
+      padding: 1.25rem 1.8rem;
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgba(252, 163, 17, 0.16), rgba(255, 255, 255, 0.78));
@@ -551,6 +558,12 @@
       .project-grid,
       .star-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
+      }
+
+      .project-card {
+        grid-row: auto;
+        grid-template-rows: none;
       }
 
       .hero-top {
@@ -684,57 +697,45 @@
 
     <section class="card portfolio" id="portfolio">
       <h2>Портфолио проектов</h2>
-      <p class="portfolio-note">Каждый кейс оформлен по STAR. Для каждой карточки можно загрузить свой скриншот, чтобы сделать портфолио визуальным.</p>
+      <p class="portfolio-note">Каждый кейс оформлен по STAR. Нажмите на карточку, чтобы открыть полный кейс.</p>
       <div class="project-grid">
-        <article class="project-card" data-project-id="scale-am-directions" tabindex="0" role="button" aria-label="Открыть STAR-кейс: Масштабирование направлений AM">
+        <article class="project-card" data-project-id="scale-am-directions" tabindex="0" role="button" aria-label="Открыть кейс: Масштабирование направлений AM">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="scale-am-directions" alt="Превью скриншота проекта запуска направлений AM" />
           </div>
           <h3>Масштабирование направлений AM</h3>
-          <p>Запустил и масштабировал две ключевые производственные линии (SLS/SLM) с готовыми к производству процессами 3D-сканирования и реверс-инжиниринга.</p>
-          <div class="project-meta">
-            <span class="chip">B2B</span>
-            <span class="chip">Операции</span>
-            <span class="chip">Лидерство</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="scale-am-directions" type="button">Открыть STAR-кейс</button>
-            <label class="upload-btn" for="upload-scale-am-directions">Загрузить скриншот</label>
-            <input class="project-upload" id="upload-scale-am-directions" data-upload-id="scale-am-directions" type="file" accept="image/*" />
+          <p>Построил две производственные линии с нуля, наладил процессы 3D-сканирования и реверс-инжиниринга, управлял P&amp;L подразделения до 150 млн ₽/год.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Результат:</strong> Выручка до 150млн₽/год, снижение срывов на 40%</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="scale-am-directions" type="button">Узнать подробнее →</button>
+            </div>
           </div>
         </article>
-        <article class="project-card" data-project-id="am-audits-prioritization" tabindex="0" role="button" aria-label="Открыть STAR-кейс: Аддитивные аудиты и приоритизация деталей">
+        <article class="project-card" data-project-id="am-audits-prioritization" tabindex="0" role="button" aria-label="Открыть кейс: Аддитивные аудиты и приоритизация">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="am-audits-prioritization" alt="Превью скриншота проекта аудита и приоритизации" />
           </div>
-          <h3>Аддитивные аудиты и приоритизация деталей</h3>
-          <p>Разработал методологию аудита и скрининга для выявления AM-возможностей с высокой ценностью на промышленных предприятиях.</p>
-          <div class="project-meta">
-            <span class="chip">Консалтинг</span>
-            <span class="chip">ROI</span>
-            <span class="chip">Лидерство</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="am-audits-prioritization" type="button">Открыть STAR-кейс</button>
-            <label class="upload-btn" for="upload-am-audits-prioritization">Загрузить скриншот</label>
-            <input class="project-upload" id="upload-am-audits-prioritization" data-upload-id="am-audits-prioritization" type="file" accept="image/*" />
+          <h3>Аддитивные аудиты и приоритизация</h3>
+          <p>Разработал фреймворк аудита предприятий: скрининг сотен деталей, оценка кандидатов для AM и подготовка бизнес-кейсов с расчётом ROI.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Результат:</strong> Десятки подходящих деталей, рост конверсии в коммерческие проекты</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="am-audits-prioritization" type="button">Узнать подробнее →</button>
+            </div>
           </div>
         </article>
-        <article class="project-card" data-project-id="ml-slm-optimization" tabindex="0" role="button" aria-label="Открыть STAR-кейс: ML-оптимизация параметров SLM">
+        <article class="project-card" data-project-id="ml-slm-optimization" tabindex="0" role="button" aria-label="Открыть кейс: ML-оптимизация параметров SLM">
           <div class="project-image-wrap">
             <img class="project-image" data-project-image="ml-slm-optimization" alt="Превью скриншота проекта ML-оптимизации SLM" />
           </div>
           <h3>ML-оптимизация параметров SLM</h3>
-          <p>Методология на базе PhD для автоматизированного подбора параметров процесса в порошковых композитах AlSi10Mg.</p>
-          <div class="project-meta">
-            <span class="chip">R&amp;D</span>
-            <span class="chip">ML</span>
-            <span class="chip">Материаловедение</span>
-          </div>
-          <div class="project-actions">
-            <button class="project-open" data-open-project="ml-slm-optimization" type="button">Открыть STAR-кейс</button>
-            <label class="upload-btn" for="upload-ml-slm-optimization">Загрузить скриншот</label>
-            <input class="project-upload" id="upload-ml-slm-optimization" data-upload-id="ml-slm-optimization" type="file" accept="image/*" />
+          <p>Разработал ML-пайплайн для автоматического подбора параметров металлической 3D-печати, заменив месяцы ручного подбора.</p>
+          <div class="project-card-bottom">
+            <div class="project-result"><strong>Результат:</strong> Ошибка с 15% до 5%, цикл настройки 1 мес. → 4 дня</div>
+            <div class="project-actions">
+              <button class="project-open" data-open-project="ml-slm-optimization" type="button">Узнать подробнее →</button>
+            </div>
           </div>
         </article>
       </div>
@@ -770,11 +771,11 @@
           <section>
             <h3>Инструменты и методы</h3>
             <ul>
-              <li>Управление проектами: Jira, Confluence, Miro, Notion; WBS, Gantt, risk-register, бюджетный трекинг</li>
-              <li>Фреймворки: Scrum, Kanban, гибридный Waterfall+Agile; STAR/RACI для коммуникации</li>
-              <li>Автоматизация: Google Sheets (скрипты + формулы), n8n (workflow-автоматизация), ChatGPT/LLM-пайплайны</li>
-              <li>Домен: SLS/SLM, 3D-сканирование, реверс-инжиниринг, CAD/CAE, промышленное внедрение AM</li>
-              <li>Лидерство: команды до 10 человек, найм и онбординг, 1-on-1, разрешение конфликтов, отчётность для C-level</li>
+              <li><strong>Управление проектами:</strong> Jira, Confluence, Miro, Notion; WBS, Gantt, risk-register, бюджетный трекинг</li>
+              <li><strong>Фреймворки:</strong> Scrum, Kanban, гибридный Waterfall+Agile; STAR/RACI для коммуникации</li>
+              <li><strong>Автоматизация:</strong> Google Sheets (скрипты + формулы), n8n (workflow-автоматизация), ChatGPT/LLM-пайплайны</li>
+              <li><strong>Домен:</strong> SLS/SLM, 3D-сканирование, реверс-инжиниринг, CAD/CAE, промышленное внедрение AM</li>
+              <li><strong>Лидерство:</strong> команды до 20 человек, найм и онбординг, 1-on-1, разрешение конфликтов, отчётность для C-level</li>
             </ul>
           </section>
         </div>
@@ -794,8 +795,8 @@
           <section>
             <h3>Языки</h3>
             <ul>
-              <li>Русский — родной</li>
-              <li>Английский — свободный (технический, деловой, академический)</li>
+              <li><strong>Русский</strong> — родной</li>
+              <li><strong>Английский</strong> — свободный (технический, деловой, академический)</li>
             </ul>
           </section>
         </div>
@@ -884,7 +885,7 @@
     const closeModalButton = document.getElementById("close-modal");
     const projectCards = document.querySelectorAll(".project-card");
     const openButtons = document.querySelectorAll("[data-open-project]");
-    const uploadInputs = document.querySelectorAll(".project-upload");
+
     const backdrop = document.querySelector("[data-close-modal]");
     let currentProjectId = null;
     const projectImages = {};
@@ -945,20 +946,6 @@
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           openProject(card.dataset.projectId);
-        }
-      });
-    });
-
-    uploadInputs.forEach((input) => {
-      input.addEventListener("change", (event) => {
-        const projectId = event.target.dataset.uploadId;
-        const file = event.target.files[0];
-        if (!projectId || !file) return;
-        const objectUrl = URL.createObjectURL(file);
-        projectImages[projectId] = objectUrl;
-        refreshProjectCardImage(projectId);
-        if (currentProjectId === projectId) {
-          visual.src = objectUrl;
         }
       });
     });
